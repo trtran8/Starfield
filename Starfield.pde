@@ -1,50 +1,90 @@
-Particle ree[];
+Particle [] big;
 //your code here
 void setup()
 {
-	size(400,400);
+  noStroke();
+  background(0);
+	size(600,600);
+	big = new Particle[70];
+  for (int i = 0; i< big.length; i++ ){
+    big[i] = new NormalParticle();
+    big[0] = new JumboParticle();
+    big[1] = new OddballParticle();
+
+  }
 	//your code here
 }
 void draw()
 {
-	ree = new Particle[100];
-	for (int i = 0; i< ree.length; i++ ){
-		ree[i] = new NormalParticle();
+
+	for (int i = 0; i< big.length; i++ ){
+    big[i].move();
+    big[i].show();
+
 	}
 	//your code here
-}
-class NormalParticle
-{
-	double myX, myY, angle, speed;
-	int Color;
-	//your code here
-	NormalParticle(){
-		myX = 0;
-    myY = 0;
-	}
-	public void move(){
-    myX = myX + (Math.random()*18 - 9);
-    myY = myY + (Math.random()*18 - 9);
-	}
-	public void show(){
-    fill(255,200,255,40);
-    ellipse(20.0,20.0,myX,myY);
-	}
 }
 interface Particle
 {
-	public void move();
+  public void move();
   public void show();
+}
+class NormalParticle implements Particle
+{
+	public double myX, myY, angle, speed;
+	int Color;
+	//your code here
+	NormalParticle(){
+	  myX = width/2;
+    myY = height/2;
+    speed = Math.random()*6+0.2;
+    angle = Math.PI*2* Math.random();
+	}
+	public void move(){
+    myX = myX + Math.cos(angle) * speed;
+    myY = myY + Math.sin(angle) * speed;
+    angle+=.01;
+	}
+	public void show(){
+    fill((int)(Math.random()*60+195),(int)(Math.random()*60+195),(int)(Math.random()*60+195));
+    ellipse((float)myX,(float)myY,20.0,20.0);
+	}
 }
 class OddballParticle implements Particle
 {
-	OddballParticle(){
-  
-}
-}
+    public double myX, myY, angle, speed;
+  OddballParticle(){
+      myX = width/2;
+    myY = height/2;
+    speed = Math.random()*6+0.2;
+    angle = Math.PI*2* Math.random();
+  }
+  public void move(){
+    myX = myX + Math.cos(angle) * speed;
+    myY = myY + Math.sin(angle) * speed;
+    angle+=.01;
+  }
+  public void show(){
+    fill(200,0,200);
+    ellipse((float)myX,(float)myY,50.0,50.0);
+  }
+ }
 class JumboParticle implements Particle
 {
-	JumboParticle(){
-  
-}
-}
+    public double myX, myY, angle, speed;
+  JumboParticle(){
+    myX = width/2;
+    myY = height/2;
+    speed = Math.random()*6+0.2;
+    angle = Math.PI*2* Math.random();
+  }
+  public void move(){
+    myX = myX + Math.cos(angle) * speed;
+    myY = myY + Math.sin(angle) * speed;
+   angle+=.01;
+  }
+  public void show(){
+        fill(200,200,0);
+            ellipse((float)myX,(float)myY,70.0,70.0);
+  }
+ }
