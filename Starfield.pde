@@ -65,23 +65,12 @@ class OddballParticle implements Particle
   }
   public void show(){
     fill(200,0,200);
-    ellipse((float)myX,(float)myY,30.0,50.0);
+    rect((float)myX,(float)myY,40.0+(float)myX/10,60.0+(float)myY/10);
   }
  }
-class JumboParticle implements Particle
+class JumboParticle extends NormalParticle
 {
-    public double myX, myY, angle, speed;
-  JumboParticle(){
-    myX = width/2;
-    myY = height/2;
-    speed = Math.random()*6+0.2;
-    angle = Math.PI*2* Math.random();
-  }
-  public void move(){
-    myX = myX + Math.cos(angle) * speed;
-    myY = myY + Math.sin(angle) * speed;
-   angle+=.01;
-  }
+
   public void show(){
         fill(200,200,0);
             ellipse((float)myX,(float)myY,70.0,70.0);
